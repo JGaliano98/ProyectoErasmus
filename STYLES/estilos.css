@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.contenidoLogin{
+    padding: 2%;
+    border: 1px black solid;
+}
+#infologin{
+
+    border: 1px black solid;
+    margin-left: 50%;
+
+}

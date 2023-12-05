@@ -1,14 +1,15 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Proyecto/Helpers/Autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/ProyectoErasmus/Helpers/Autoload.php';
 Autoload::Autoload();
 
-class RP_CandidatoRepositorioIdioma{
+class RP_ConvocatoriaBaremoIdioma{
 
     public static function MostrarTodo(){
 
         //Abrimos la conexión
         $conexion=Conexion::AbreConexion();
+        
 
         $resultado= $conexion->query("Select * from Convocatoria_Baremo_Idioma");
 
@@ -22,11 +23,11 @@ class RP_CandidatoRepositorioIdioma{
 
             $ConvocatoriaBaremoidioma = new Convocatoria_Baremo_Idioma ($ID, $ID_Convocatoria, $ID_Idioma, $nota);
 
-            //$array[]=$ConvocatoriaBaremoidioma;
+            $array[]=$ConvocatoriaBaremoidioma;
             
         }
+        return $array;
         //return $ConvocatoriaBaremoidioma;
-        return $ConvocatoriaBaremoidioma;
 
     }
 

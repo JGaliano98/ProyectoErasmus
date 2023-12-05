@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Proyecto/Helpers/Autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/ProyectoErasmus/Helpers/Autoload.php';
 Autoload::Autoload();
 
 class RP_NivelIdioma{
@@ -20,11 +20,11 @@ class RP_NivelIdioma{
 
             $NivelIdioma = new NivelIdioma ($ID_Idioma, $nombre);
 
-            //$array[]=$NivelIdioma;
+            $array[]=$NivelIdioma;
             
         }
         //return $NivelIdioma;
-        return $NivelIdioma;
+        return $array;
 
     }
 

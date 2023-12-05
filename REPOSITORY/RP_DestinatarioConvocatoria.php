@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Proyecto/Helpers/Autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/ProyectoErasmus/Helpers/Autoload.php';
 Autoload::Autoload();
 
 class RP_DestinatarioConvocatoria{
@@ -21,11 +21,11 @@ class RP_DestinatarioConvocatoria{
 
             $DestinatarioConvocatoria = new Destinatario_Convocatoria ($ID, $ID_Convocatoria, $codigo_grupo);
 
-            //$array[]=$DestinatarioConvocatoria;
+            $array[]=$DestinatarioConvocatoria;
             
         }
+        return $array;
         //return $DestinatarioConvocatoria;
-        return $DestinatarioConvocatoria;
 
     }
 

@@ -5,7 +5,8 @@ class ItemBaremable {
     private $nombre;
 
     // Constructor
-    public function __construct($nombre) {
+    public function __construct($ID_Item, $nombre) {
+        $this->ID_Item = $ID_Item;
         $this->nombre = $nombre;
     }
 

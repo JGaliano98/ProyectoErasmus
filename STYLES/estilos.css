@@ -4,14 +4,85 @@
     box-sizing: border-box;
 }
 
+#divHeader{
+    border: 2px rgba(3,77,162,255) solid;
+    width: 100%;
+    height: 100px;
+
+}
+#divFooter{
+
+    border: 2px rgba(3,77,162,255) solid;
+    width: 100%;
+    height: 30px;
+
+}
+
+#imagenLogo{
+    width: 150px;
+    height: 96px;
+}
 
 .contenidoLogin{
     padding: 2%;
-    border: 1px black solid;
+    /* border: 1px black solid; */
 }
 #infologin{
 
-    border: 1px black solid;
-    margin-left: 50%;
+    padding: 2%;
+    border: 2px rgb(41,79,78) solid;
+    width: 20%;
+    margin-left: 40%;
+    font-family: Tahoma;
+}
+#divUsuario{
+
+    margin-top: 5%;
+   
+}
+#divTitulo{
+    width: 100%;
+    text-align: center;
+}
+#divBotones{
+    margin-top: 10%;
+    width: 100%;
+    
+}
+#btnAcceder{
+    margin-right: 25%;
+    margin-left: 5%;
 
 }
+
+#txtNombreUsuario, #txtContraseña{
+    width: 100%;
+}
+#divContraseña{
+    margin-top: 10%;
+}
+
+
+/* Crear Convocatoria */
+#infoConvocatoria{
+
+    border: 1px black solid;
+
+}
+
+#divTituloConvocatoria, #divTituloReg{
+
+    border: 1px black solid;
+    text-align: center;
+    padding: 2%;
+}
+
+#tituloConvocatoria, #tituloRegistro{
+
+    font-family: Tahoma;
+    font-size:150%;
+
+}
+
+
+

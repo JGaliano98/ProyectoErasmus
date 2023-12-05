@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Proyecto/Helpers/Autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/ProyectoErasmus/Helpers/Autoload.php';
 Autoload::Autoload();
 
 class RP_ItemBaremable{
@@ -20,11 +20,11 @@ class RP_ItemBaremable{
 
             $Item = new ItemBaremable ($ID_Item, $nombre);
 
-            //$array[]=$Item;
+            $array[]=$Item;
             
         }
+        return $array;
         //return $Item;
-        return $Item;
 
     }
 

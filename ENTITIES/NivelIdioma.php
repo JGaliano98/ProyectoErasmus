@@ -4,7 +4,9 @@ class NivelIdioma {
     private $nombre;
 
     // Constructor
-    public function __construct($nombre) {
+    public function __construct($ID_Idioma, $nombre) {
+       
+        $this->ID_Idioma = $ID_Idioma;
         $this->nombre = $nombre;
     }
 

@@ -8,7 +8,8 @@ class Proyecto {
     private $fecha_fin;
 
     // Constructor
-    public function __construct($codigo_proyecto, $nombre, $fecha_inicio, $fecha_fin) {
+    public function __construct($ID_Proyecto,$codigo_proyecto, $nombre, $fecha_inicio, $fecha_fin) {
+        $this->ID_Proyecto = $ID_Proyecto;
         $this->codigo_proyecto = $codigo_proyecto;
         $this->nombre = $nombre;
         $this->fecha_inicio = $fecha_inicio;

@@ -14,7 +14,8 @@ class Convocatoria {
     private $ID_Proyecto;
 
     // Constructor
-    public function __construct($movilidades, $dias, $tipo, $destino, $fecha_inicio_solicitudes, $fecha_fin_solicitudes, $fecha_inicio_pruebas, $fecha_fin_pruebas, $fecha_lista_provisional, $fecha_lista_definitiva, $ID_Proyecto) {
+    public function __construct($ID_Convocatoria, $movilidades, $dias, $tipo, $destino, $fecha_inicio_solicitudes, $fecha_fin_solicitudes, $fecha_inicio_pruebas, $fecha_fin_pruebas, $fecha_lista_provisional, $fecha_lista_definitiva, $ID_Proyecto) {
+        $this->ID_Convocatoria = $ID_Convocatoria;
         $this->movilidades = $movilidades;
         $this->dias = $dias;
         $this->tipo = $tipo;

@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/Proyecto/Helpers/Autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/ProyectoErasmus/Helpers/Autoload.php';
 Autoload::Autoload();
 
 class RP_Proyecto{
@@ -8,6 +8,8 @@ class RP_Proyecto{
 
         //Abrimos la conexión
         $conexion=Conexion::AbreConexion();
+
+        $array=null;
 
         $resultado= $conexion->query("Select * from Proyecto");
 
@@ -22,12 +24,10 @@ class RP_Proyecto{
 
             $Proyecto = new Proyecto ($ID_Proyecto, $codigo_proyecto, $nombre, $fecha_inicio, $fecha_fin);
 
-            //$array[]=$Proyecto;
+            $array[]=$Proyecto;
             
         }
-        //return $array;
-        return $Proyecto;
-
+        return $array;
     }
 
     public static function BuscarPorID($id){

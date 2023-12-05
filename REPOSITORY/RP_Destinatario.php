@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Proyecto/Helpers/Autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/ProyectoErasmus/Helpers/Autoload.php';
 Autoload::Autoload();
 
 class RP_Destinatario{
@@ -20,11 +20,11 @@ class RP_Destinatario{
 
             $Destinatario = new Destinatario ($codigo_grupo, $nombre);
 
-            //$array[]=$Destinatario;
+            $array[]=$Destinatario;
             
         }
+        return $array;
         //return $Destinatario;
-        return $Destinatario;
 
     }
 

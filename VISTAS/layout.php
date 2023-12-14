@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Autoescuela Fuentezuelas</title>
+    <title>Portal de Becas Erasmus + </title>
     <link rel="stylesheet" href="Styles/estilos.css">
+    <script src="../ProyectoErasmus/JS/registro.js"></script>
 </head>
 
 <body id = "fondo">

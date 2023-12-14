@@ -81,12 +81,11 @@ class RP_ConvocatoriaBaremoIdioma{
         $conexion=Conexion::AbreConexion();
    
        
-        $ID= $objeto->ID;
-        $ID_Convocatoria = $objeto->ID_Convocatoria;
-        $ID_Idioma=$objeto->ID_Idioma;
-        $nota = $objeto->nota;
+        $ID_Convocatoria = $objeto->getIDConvocatoria();
+        $ID_Idioma=$objeto->getIDIdioma();
+        $nota = $objeto->getNota();
 
-        $resultado=$conexion->exec("INSERT INTO Convocatoria_Baremo_Idioma (ID, ID_Convocatoria, ID_Idioma, nota) VALUES ('$ID', '$ID_Convocatoria', '$ID_Idioma', '$nota')");
+        $resultado=$conexion->exec("INSERT INTO Convocatoria_Baremo_Idioma (ID_Convocatoria, ID_Idioma, nota) VALUES ( '$ID_Convocatoria', '$ID_Idioma', '$nota')");
 
     }
 

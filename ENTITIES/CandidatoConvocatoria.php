@@ -15,7 +15,8 @@ class CandidatoConvocatoria {
     private $domicilio;
 
     // Constructor
-    public function __construct($ID_Candidato, $ID_Convocatoria, $DNI_Candidato, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $curso, $telefono, $correo, $domicilio) {
+    public function __construct($ID, $ID_Candidato, $ID_Convocatoria, $DNI_Candidato, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $curso, $telefono, $correo, $domicilio) {
+        $this->ID = $ID;
         $this->ID_Candidato = $ID_Candidato;
         $this->ID_Convocatoria = $ID_Convocatoria;
         $this->DNI_Candidato = $DNI_Candidato;

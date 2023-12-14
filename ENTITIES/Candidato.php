@@ -1,6 +1,6 @@
 <?php
 
-class Candidato {
+class Candidato implements \JsonSerializable {
     private $ID_Candidato;
     private $DNI_Candidato;
     private $nombre;
@@ -16,7 +16,8 @@ class Candidato {
     private $tutor;
 
     // Constructor
-    public function __construct($DNI_Candidato, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $curso, $telefono, $correo, $domicilio, $contraseña, $rol, $tutor) {
+    public function __construct($ID_Candidato, $DNI_Candidato, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $curso, $telefono, $correo, $domicilio, $contraseña, $rol, $tutor) {
+        $this->ID_Candidato = $ID_Candidato;
         $this->DNI_Candidato = $DNI_Candidato;
         $this->nombre = $nombre;
         $this->apellido1 = $apellido1;
@@ -131,6 +132,14 @@ class Candidato {
 
     public function setTutor($tutor) {
         $this->tutor = $tutor;
+    }
+
+    public function toJSON(){
+        return json_encode(get_object_vars($this));
+    }
+    public function jsonSerialize():array{
+        $var=get_object_vars($this);
+        return $var;
     }
 }
 

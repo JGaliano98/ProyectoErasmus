@@ -4,4 +4,8 @@
             <img id="imagenLogo" src="STYLES/IMAGENES/logo.jpg">
         </a>
     </div>
+    <div id="divTituloHeader">
+        <label id="tituloHeader">Portal de becas Erasmus+</label>
+    </div>
+    
 </header>

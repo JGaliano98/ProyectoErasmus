@@ -36,6 +36,39 @@ class RP_CandidatoConvocatoria{
 
     }
 
+    public static function MostrarTodoArray(){
+
+        //Abrimos la conexión
+        $conexion=Conexion::AbreConexion();
+
+        $resultado= $conexion->query("Select * from Candidato_Convocatoria");
+        $array=null;
+
+        while($tuplas=$resultado->fetch(PDO::FETCH_OBJ)){
+
+            $ID= $tuplas->ID;
+            $ID_Candidato = $tuplas->ID_Candidato;
+            $ID_Convocatoria = $tuplas->ID_Convocatoria;
+            $DNI_Candidato=$tuplas->DNI_Candidato;
+            $nombre = $tuplas->nombre;
+            $apellido1 = $tuplas->apellido1;
+            $apellido2 = $tuplas->apellido2;
+            $fecha_nacimiento = $tuplas->fecha_nacimiento;
+            $curso=$tuplas->curso;
+            $telefono = $tuplas->telefono;
+            $correo = $tuplas->correo;
+            $domicilio = $tuplas->domicilio;
+
+            $Candidato = new CandidatoConvocatoria ($ID, $ID_Candidato, $ID_Convocatoria, $DNI_Candidato, $nombre, $apellido1, $apellido2, $fecha_nacimiento, $curso, $telefono, $correo, $domicilio);
+
+            $array[]=$Candidato;
+            
+        }
+        //return $Candidato;
+        return $array;
+
+    }
+
     public static function BuscarPorID($id){
 
         

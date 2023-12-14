@@ -12,9 +12,10 @@ class Convocatoria {
     private $fecha_lista_provisional;
     private $fecha_lista_definitiva;
     private $ID_Proyecto;
+    private $nombre;
 
     // Constructor
-    public function __construct($ID_Convocatoria, $movilidades, $dias, $tipo, $destino, $fecha_inicio_solicitudes, $fecha_fin_solicitudes, $fecha_inicio_pruebas, $fecha_fin_pruebas, $fecha_lista_provisional, $fecha_lista_definitiva, $ID_Proyecto) {
+    public function __construct($ID_Convocatoria, $movilidades, $dias, $tipo, $destino, $fecha_inicio_solicitudes, $fecha_fin_solicitudes, $fecha_inicio_pruebas, $fecha_fin_pruebas, $fecha_lista_provisional, $fecha_lista_definitiva, $ID_Proyecto, $nombre) {
         $this->ID_Convocatoria = $ID_Convocatoria;
         $this->movilidades = $movilidades;
         $this->dias = $dias;
@@ -27,6 +28,7 @@ class Convocatoria {
         $this->fecha_lista_provisional = $fecha_lista_provisional;
         $this->fecha_lista_definitiva = $fecha_lista_definitiva;
         $this->ID_Proyecto = $ID_Proyecto;
+        $this->nombre = $nombre;
     }
 
     // Getters
@@ -77,6 +79,9 @@ class Convocatoria {
     public function getID_Proyecto() {
         return $this->ID_Proyecto;
     }
+    public function getNombre() {
+        return $this->nombre;
+    }
 
     // Setters
     public function setMovilidades($movilidades) {
@@ -121,6 +126,9 @@ class Convocatoria {
 
     public function setID_Proyecto($ID_Proyecto) {
         $this->ID_Proyecto = $ID_Proyecto;
+    }
+    public function setNombre($nombre) {
+        $this->nombre = $nombre;
     }
 }
 

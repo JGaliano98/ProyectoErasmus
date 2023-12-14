@@ -78,11 +78,10 @@ class RP_DestinatarioConvocatoria{
         $conexion=Conexion::AbreConexion();
    
        
-        $ID= $objeto->ID;
-        $ID_Convocatoria = $objeto->ID_Convocatoria;
-        $codigo_grupo=$objeto->codigo_grupo;
+        $ID_Convocatoria = $objeto->getIDConvocatoria();
+        $codigo_grupo=$objeto->getCodigoGrupo();
 
-        $resultado=$conexion->exec("INSERT INTO Destinatario_Convocatoria (ID, ID_Convocatoria, codigo_grupo) VALUES ('$ID', '$ID_Convocatoria', '$codigo_grupo')");
+        $resultado=$conexion->exec("INSERT INTO Destinatario_Convocatoria ( ID_Convocatoria, codigo_grupo) VALUES ( '$ID_Convocatoria', '$codigo_grupo')");
 
     }
 

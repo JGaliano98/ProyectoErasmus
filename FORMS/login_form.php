@@ -6,6 +6,7 @@ Autoload::Autoload();
 $registrarse = isset($_POST['btnRegistro']);
 $acceder = isset($_POST['btnAcceder']);
 
+
 if ($registrarse) {
 
     header('Location: /ProyectoErasmus/index.php?menu=registro');
@@ -14,9 +15,36 @@ if ($registrarse) {
 
 if ($acceder) {
 
-    
+    $usuario = $_POST['txtNombreUsuario'];
+    $contraseña = $_POST['txtContraseña'];
 
+
+    $existe = funcionesLogin::existeUsuario($usuario, $contraseña);
+
+    if ($existe == true) {
+
+        funcionesLogin::logIn($usuario);
+
+
+        $user=RP_Candidato::BuscarPorDNI($usuario);
+
+        if($user->getRol() == 'Administrador'){
+            
+            header('Location: /ProyectoErasmus/index.php?menu=administrador');
+
+        } 
+
+        if($user->getRol() == 'Alumno'){
+ 
+            header('Location: /ProyectoErasmus/index.php?menu=alumno');
+        }
+
+    }else{
+        echo "No existe el usuario";
+    }
 }
+
+
 
 ?>
 <div class="contenidoLogin">
@@ -27,7 +55,7 @@ if ($acceder) {
             </div>
             <div id="divUsuario">
                 <div id="lblNombreUsuario">
-                    <label>Nombre de Usuario:</label>
+                    <label>DNI:</label>
                 </div>
                 <div id="divtxtNombreUsuario">
                     <input type="text" name="txtNombreUsuario" id="txtNombreUsuario">

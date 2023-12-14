@@ -119,7 +119,7 @@ if($solicitar){
         <form method="post">
 
             <div id="divTituloConvocatoria">
-                <label id="tituloConvocatoria">CREAR UNA NUEVA CONVOCATORIA</label>
+                <label id="tituloConvocatoria">ACTUALIZAR CONVOCATORIA EXISTENTE</label>
             </div>
 
             <div id="todaConvocatoria">
@@ -355,7 +355,7 @@ if($solicitar){
 
                 <div id="divBotonesConvocatoria">
                     <div id="btnSolicitar">
-                        <input type="submit" value="Crear" name="btnSolicitar" id="btnSolicitar">
+                        <input type="submit" value="Actualizar" name="btnSolicitar" id="btnSolicitar">
                     </div>
                     <div id="btnVolver">
                         <input type="submit" value="Volver" name="btnVolver" id="btnVolver">

@@ -85,12 +85,12 @@ class RP_ConvocatoriaBaremo{
         $conexion=Conexion::AbreConexion();
    
         $ID= 0;
-        $ID_Convocatoria = $objeto->ID_Convocatoria;
-        $ID_Item=$objeto->ID_Item;
-        $notaMax = $objeto->notaMax;
-        $notaMin = $objeto->notaMin;
-        $requisito = $objeto->requisito;
-        $aportaAlumno = $objeto->aportaAlumno;
+        $ID_Convocatoria = $objeto->getIDConvocatoria();
+        $ID_Item=$objeto->getIDItem();
+        $notaMax = $objeto->getNotaMax();
+        $notaMin = $objeto->getNotaMin();
+        $requisito = $objeto->getRequisito();
+        $aportaAlumno = $objeto->getAportaAlumno();
 
         $resultado=$conexion->exec("INSERT INTO Convocatoria_Baremo (ID, ID_Convocatoria, ID_Item, notaMax, notaMin, requisito, aportaAlumno) VALUES ('$ID', '$ID_Convocatoria', '$ID_Item', '$notaMax', '$notaMin', '$requisito', '$aportaAlumno')");
 

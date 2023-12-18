@@ -13,6 +13,72 @@ HTMLInputElement.prototype.relleno = function(){
     return respuesta;
 }
 
+//Funcion que valida un correo electrónico: 
+
+HTMLInputElement.prototype.correoElectronico = function () {
+    // Obtén el valor del campo de correo electrónico
+    var correoElectronico = this.value;
+
+    // Verifica si el correo electrónico después de quitar espacios en blanco está en blanco
+    if (correoElectronico.trim() === '') {
+        return false;
+    }
+
+    // Utiliza una expresión regular para verificar el formato básico de un correo electrónico
+    var respuesta = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoElectronico);
+
+    // Devuelve el resultado de la validación
+    return respuesta;
+};
+
+//Funcion que valida un telefono: 
+
+HTMLInputElement.prototype.telefono = function () {
+    // Elimina espacios en blanco del valor del teléfono
+    var numeroTelefono = this.value.replace(/\s/g, '');
+
+    // Verifica si el número de teléfono después de quitar espacios en blanco está en blanco
+    if (numeroTelefono === '') {
+        return false;
+    }
+
+    // Verifica si el número de teléfono tiene al menos 9 dígitos numéricos
+    var respuesta = /^\d{9,}$/.test(numeroTelefono);
+
+    // Devuelve el resultado de la validación
+    return respuesta;
+};
+
+//Valida fecha de nacimiento:
+
+HTMLInputElement.prototype.fechaNacimiento = function () {
+    // Obtén el valor de la fecha de nacimiento
+    var fechaNacimiento = this.value;
+
+    // Verifica el formato de fecha "YYYY-MM-DD"
+    var formatoValido = /^\d{4}-\d{2}-\d{2}$/.test(fechaNacimiento);
+
+    if (!formatoValido) {
+        return false; // Formato de fecha no válido
+    }
+
+    // Verifica si la fecha es una fecha válida
+    var partesFecha = fechaNacimiento.split("-");
+    var año = parseInt(partesFecha[0]);
+    var mes = parseInt(partesFecha[1]) - 1; // Los meses en JavaScript son de 0 a 11
+    var dia = parseInt(partesFecha[2]);
+
+    var fechaObj = new Date(año, mes, dia);
+
+    var esFechaValida =
+        fechaObj.getFullYear() === año &&
+        fechaObj.getMonth() === mes &&
+        fechaObj.getDate() === dia;
+
+    return esFechaValida;
+};
+
+
 //Funcion que valida un dni
 
 HTMLInputElement.prototype.dni = function () {
@@ -20,7 +86,7 @@ HTMLInputElement.prototype.dni = function () {
     var respuesta = false;
 
     if (this.value!="") {
-        var partes = (/^(\d{8})([TRWAGMYFPDXBNJZSQVHLCKET])$/i).exec(this.value); //coincidencia completa -> partes[0], por eso hacemos partes[1] y partes[2]
+        var partes = (/^(\d{8})([TRWAGMYFPDXBNJZSQVHLCKET])$/i).exec(this.value);
         if (partes){
             respuesta = letras[partes[1]%23]==partes[2].toUpperCase();
         }

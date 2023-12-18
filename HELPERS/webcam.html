@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang = "es">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <title>Mostrar WebCam</title>
+        <style>
+          #contenedor{
+            position: absolute;
+            height: 240px;
+            width: 420px;
+            margin-left: 50%;
+            margin-top: 2%;
+          }
+
+          #cuadradito{
+            position: absolute;
+            height: 430px;
+            width: 620px;
+            left: 0;
+            top: 0;
+            z-index: 99;
+            border: 1px solid;
+            
+          }
+          #player{
+            position: absolute;
+            margin-top: 5%;
+            margin-left: 10%;
+            height: 240px;
+            width: 400px 
+          }
+          #capture{
+            position: absolute;
+            margin-top: 25%;
+            margin-left: 15%;
+            width: 20%;
+            height: 10%;
+          }
+
+          #volverCam{
+            position: absolute;
+            margin-top: -6%;
+            margin-left: 80%;
+            width: 15%;
+            height: 10%;
+
+          }
+        </style>
+    </head>
+    <body>
+      <video id="player" controls autoplay></video>
+      
+      
+      
+      <button id = "capture">Capturar</button>
+      <div id = "contenedor">
+        <canvas id = "canvas" width = "620" height = "430"></canvas>
+        <div id = "cuadradito"></div>
+      </div>
+      <button id = "volverCam">VOLVER</button>
+      <script>
+        const player = document.getElementById('player');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const captureButton = document.getElementById('capture');
+        const volver = document.getElementById('volverCam');
+      
+        const constraints = 
+        {
+          video: true,
+        };
+      
+        captureButton.addEventListener('click', () => 
+        {
+          context.drawImage(player, 0, 0, canvas.width, canvas.height);
+      
+          // Stop all video streams.
+          player.srcObject.getVideoTracks().forEach(track => track.stop());
+        });
+
+        volver.addEventListener('click', function() {
+            
+            window.location.href = '/ProyectoErasmus/index.php?menu=verSolicitudesDisp';
+        });
+      
+        navigator.mediaDevices.getUserMedia(constraints).then((stream) => 
+        {
+          // Attach the video stream to the video element and autoplay.
+          player.srcObject = stream;
+        });
+
+        cuadradito = document.getElementById("cuadradito");
+        cuadradito.onmousemove = function(ev) 
+        {
+          console.log(ev)
+        }
+      </script>
+    </body>
+</html>

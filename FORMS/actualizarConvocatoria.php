@@ -2,11 +2,16 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/ProyectoErasmus/Helpers/Autoload.php';
 Autoload::Autoload();
 
+session_start(); 
+
 $mostrar = RP_Convocatoria::MostrarTodoArray();
 $i = 0;
 $fechaActual = date('Y-m-d'); // Obtener la fecha actual en el formato YYYY-MM-DD
 
 $volver = isset($_POST['btnVolverVerConv']);
+
+
+
 
 if ($volver) {
 
@@ -48,6 +53,8 @@ if ($volver) {
                             <td name="fechaDef<?php echo $i ?>"><?php echo $key->getFechaListaDefinitiva(); ?></td>
                             <td>
                                 <form method="post">
+                                    <!-- uso el hidden para obtener un campo oculto con el valor de la ID_Convocatoria -->
+                                    <input type="hidden" name="ID_Convocatoria<?php echo $i ?>" value="<?php echo $key->getID_Convocatoria(); ?>">
                                     <input type="submit" id="btnActualizar" name="btnActualizar<?php echo $i ?>" id="botonActualizar" value="Actualizar">
                                 </form>
                             </td>
@@ -69,9 +76,13 @@ if ($volver) {
 <?php
 for ($j = 0; $j < $i; $j++) {
     if (isset($_POST['btnActualizar' . $j])) {
+
+        $ID = $_POST['ID_Convocatoria'.$j];
+
         
-        header('Location:/ProyectoErasmus/index.php?menu=actualizarConvocatoriaForm');
+        header('Location:/ProyectoErasmus/index.php?menu=actualizarConvocatoriaForm&&ID_Convocatoria='.$ID);
 
     }
 }
+
 ?>

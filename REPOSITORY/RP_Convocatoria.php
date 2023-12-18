@@ -155,11 +155,19 @@ class RP_Convocatoria{
 
         $conexion = Conexion::AbreConexion();
 
-        $resultado = $conexion->exec("UPDATE Convocatoria SET ID_Convocatoria='{$objeto->ID_Convocatoria}', movilidades='{$objeto->movilidades}',
-        dias='{$objeto->dias}', tipo='{$objeto->tipo}', destino='{$objeto->destino}', fecha_inicio_solicitudes='{$objeto->fecha_inicio_solicitudes}',
-        fecha_fin_solicitudes='{$objeto->fecha_fin_solicitudes}', fecha_inicio_pruebas='{$objeto->fecha_inicio_pruebas}', fecha_fin_pruebas='{$objeto->fecha_fin_pruebas}',
-        fecha_lista_provisional='{$objeto->fecha_lista_provisional}', fecha_lista_definitiva='{$objeto->fecha_lista_definitiva}',
-         ID_Proyecto='{$objeto->ID_Proyecto}', nombre='{$objeto->nombre}' WHERE ID_Convocatoria={$id}");
+        $resultado = $conexion->exec("UPDATE Convocatoria SET  movilidades='{$objeto->getMovilidades()}',
+        dias='{$objeto->getDias()}', tipo='{$objeto->getTipo()}', destino='{$objeto->getDestino()}', fecha_inicio_solicitudes='{$objeto->getFechaInicioSolicitudes()}',
+        fecha_fin_solicitudes='{$objeto->getFechaFinSolicitudes()}', fecha_inicio_pruebas='{$objeto->getFechaInicioPruebas()}', fecha_fin_pruebas='{$objeto->getFechaFinPruebas()}',
+        fecha_lista_provisional='{$objeto->getFechaListaProvisional()}', fecha_lista_definitiva='{$objeto->getFechaListaDefinitiva()}',
+         nombre='{$objeto->getNombre()}' WHERE ID_Convocatoria={$id}");
+
+        if ($resultado !=1) {
+
+            return false;
+
+        }else{
+            return true;
+        }
 
     }
 

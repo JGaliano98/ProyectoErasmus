@@ -57,6 +57,32 @@ class RP_ConvocatoriaBaremoIdioma{
 
     }
 
+    public static function BuscarPorID_ConvocatoriaeID_Idioma($id, $idIdioma){
+
+        
+        //Abrimos la conexión
+        $conexion=Conexion::AbreConexion();
+
+        $resultado= $conexion->query("Select * from Convocatoria_Baremo_Idioma where ID_Convocatoria=$id and ID_Idioma=$idIdioma");
+
+        while($tuplas=$resultado->fetch(PDO::FETCH_OBJ)){
+
+            $ID= $tuplas->ID;
+            $ID_Convocatoria = $tuplas->ID_Convocatoria;
+            $ID_Idioma=$tuplas->ID_Idioma;
+            $nota = $tuplas->nota;
+     
+
+            $ConvocatoriaBaremoidioma = new Convocatoria_Baremo_Idioma ($ID, $ID_Convocatoria, $ID_Idioma, $nota);
+
+            //$array[]=$ConvocatoriaBaremoidioma;
+            
+        }
+        //return $ConvocatoriaBaremoidioma;
+        return $ConvocatoriaBaremoidioma;
+
+    }
+
     public static function BorraPorID($id){
 
         //Abrimos la conexion

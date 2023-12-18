@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Portal de Becas Erasmus + </title>
     <link rel="stylesheet" href="Styles/estilos.css">
+    <script src="../ProyectoErasmus/JS/validaciones.js"></script>
+    <script src="../ProyectoErasmus/JS/logica.js"></script>
     <script src="../ProyectoErasmus/JS/registro.js"></script>
+    <script src="../ProyectoErasmus/JS/pdf.js"></script>
 </head>
 
 <body id = "fondo">

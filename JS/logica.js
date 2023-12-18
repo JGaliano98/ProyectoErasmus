@@ -17,10 +17,10 @@ window.addEventListener("load", function(){
             this.form.classList.remove("invalido");
         } else{
             //Se le añade un atributo valido
-            this.form.classList.add("invalida");
+            this.form.classList.add("invalido");
             
             //Se borra el atributo invalido en caso de que lo tenga
-            this.form.classList.remove("valida");
+            this.form.classList.remove("valido");
         }
     }
 })

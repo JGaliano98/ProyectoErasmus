@@ -2,11 +2,10 @@ window.addEventListener("load", function(){
     
     var btnRegistrar = document.getElementById("btnRegistroReg");
 
-
     btnRegistrar.addEventListener("click", function(ev) {
         ev.preventDefault();
         // Obtener los valores de los campos del formulario
-        var ID_Candidato=1;
+        var ID_Candidato = 1;
         var DNI_Candidato = document.getElementById("txtDNI").value;
         var contraseña = document.getElementById("txtContraseñaReg").value;
         var nombre = document.getElementById("txtNombreReg").value;
@@ -20,11 +19,8 @@ window.addEventListener("load", function(){
         var rol = "Alumno";
         var tutor = document.getElementById("txtTutorReg").value;
 
-    
-
         // Crear un objeto con los datos del usuario
         var datosUsuario = {
-
             ID_Candidato: ID_Candidato,
             DNI_Candidato: DNI_Candidato,
             nombre: nombre,
@@ -36,12 +32,9 @@ window.addEventListener("load", function(){
             correo: correo,
             domicilio: domicilio,
             contraseña: contraseña,
-            rol:rol,
+            rol: rol,
             tutor: tutor
         };
-
-        alert(JSON.stringify(datosUsuario));
-
 
         // Enviar los datos al servidor mediante una solicitud fetch
         fetch("../ProyectoErasmus/API/API_Candidato.php", {
@@ -51,17 +44,13 @@ window.addEventListener("load", function(){
             },
             body: JSON.stringify(datosUsuario)
         })
-    
         .then(x => x.json())
-        .then(y=> {
-
-            if(y.statusCode==200){
-                alert('Registrado correctamente');
-            }else{
-                alert('Error');
-
-            }
+        .then(y => {
+           //alert("Usuario registrado con éxito");
         })
-   
+        .catch(error => {
+            console.error('Hubo un error:', error);
+            //alert('Hubo un error al procesar la solicitud');
+        });
     });
 });

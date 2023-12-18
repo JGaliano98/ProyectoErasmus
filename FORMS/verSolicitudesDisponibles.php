@@ -31,7 +31,10 @@ $i = 0;
                         <th>PLAZAS</th>
                         <th>DIAS</th>
                         <th>DESTINO</th>
+                        <th>FOTOGRAFIA</th>
+                        <th>ARCHIVOS</th>
                         <th>SOLICITAR</th>
+                        
                     </tr>
                     <?php
                     foreach ($mostrar as $key):
@@ -41,11 +44,25 @@ $i = 0;
                         <td name="Plazas<?php echo $i ?>"><?php echo $key->getMovilidades(); ?></td>  
                         <td name="Dias<?php echo $i ?>"><?php echo $key->getDias(); ?></td>
                         <td name="Destino<?php echo $i ?>"><?php echo $key->getDestino(); ?></td>
+                        <form method="post">
+                        
                         <td>
-                            <form method="post">
-                                <input type="submit" id="btnSolicitarSol" name="btnSolicitarSol<?php echo $i ?>" id="btnSolicitarSol" value="Solicitar">
-                            </form>
+                            
+                                <input type="submit" id="btnFoto" name="btnFoto<?php echo $i ?>" value="Fotografia">
+                           
                         </td>
+                        <td>
+                            
+                            <input type="submit" id="btnPDF" name="btnPDF<?php echo $i ?>" value="Adjuntar Documentos">
+                       
+                        </td>
+                        <td>
+                          
+                                <input type="submit" id="btnSolicitarSol" name="btnSolicitarSol<?php echo $i ?>" id="btnSolicitarSol" value="Solicitar">
+                            
+                        </td>
+                        </form>
+                        
                     </tr>
                     <?php
                     $i++;
@@ -66,9 +83,38 @@ $i = 0;
     for ($j = 0; $j < $i; $j++) {
         if (isset($_POST['btnSolicitarSol' . $j])) {
     
-            
+            echo('Solicitada');
             
         }
+
+        if (isset($_POST['btnFoto' . $j])) {
+    
+            ?><script>
+            // Redireccionar a /ProyectoErasmus/index.php?menu=pdf
+            window.location.href = '/ProyectoErasmus/index.php?menu=webcam';
+        </script>
+        <?php
+            
+        }
+
+        
+       
     }
+
+    for ($j = 0; $j < $i; $j++) {
+        if (isset($_POST['btnPDF' . $j])) {
+    
+            ?><script>
+                // Redireccionar a /ProyectoErasmus/index.php?menu=pdf
+                window.location.href = '/ProyectoErasmus/index.php?menu=pdf';
+            </script>
+            <?php
+            
+        }
+
+       
+    }
+
+   
   
 ?>

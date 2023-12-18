@@ -32,9 +32,7 @@ class RP_ConvocatoriaBaremo{
 
     }
 
-    public static function BuscarPorID($id){
-
-        
+    public static function BuscarPorID($id){  
         //Abrimos la conexión
         $conexion=Conexion::AbreConexion();
 
@@ -57,8 +55,61 @@ class RP_ConvocatoriaBaremo{
         }
         //return $ConvocatoriaBaremo;
         return $ConvocatoriaBaremo;
-
     }
+
+
+    public static function BuscarPorID_Convocatoria($id){  
+        //Abrimos la conexión
+        $conexion=Conexion::AbreConexion();
+
+        $resultado= $conexion->query("Select * from Convocatoria_Baremo where ID_Convocatoria=$id");
+        $ConvocatoriaBaremo=null;
+
+        while($tuplas=$resultado->fetch(PDO::FETCH_OBJ)){
+
+            $ID= $id;
+            $ID_Convocatoria = $tuplas->ID_Convocatoria;
+            $ID_Item=$tuplas->ID_Item;
+            $notaMax = $tuplas->notaMax;
+            $notaMin = $tuplas->notaMin;
+            $requisito = $tuplas->requisito;
+            $aportaAlumno = $tuplas->aportaAlumno;
+
+            $ConvocatoriaBaremo = new Convocatoria_Baremo ($ID, $ID_Convocatoria, $ID_Item, $notaMax, $notaMin, $requisito, $aportaAlumno);
+
+            //$array[]=$ConvocatoriaBaremo;
+            
+        }
+        //return $ConvocatoriaBaremo;
+        return $ConvocatoriaBaremo;
+    }
+
+    public static function BuscarPorID_ConvocatoriaeID_Item($id, $idItem){  
+        //Abrimos la conexión
+        $conexion=Conexion::AbreConexion();
+
+        $resultado= $conexion->query("Select * from Convocatoria_Baremo where ID_Convocatoria=$id and ID_Item=$idItem");
+        $ConvocatoriaBaremo=null;
+
+        while($tuplas=$resultado->fetch(PDO::FETCH_OBJ)){
+
+            $ID= $id;
+            $ID_Convocatoria = $tuplas->ID_Convocatoria;
+            $ID_Item=$tuplas->ID_Item;
+            $notaMax = $tuplas->notaMax;
+            $notaMin = $tuplas->notaMin;
+            $requisito = $tuplas->requisito;
+            $aportaAlumno = $tuplas->aportaAlumno;
+
+            $ConvocatoriaBaremo = new Convocatoria_Baremo ($ID, $ID_Convocatoria, $ID_Item, $notaMax, $notaMin, $requisito, $aportaAlumno);
+
+            //$array[]=$ConvocatoriaBaremo;
+            
+        }
+        //return $ConvocatoriaBaremo;
+        return $ConvocatoriaBaremo;
+    }
+
 
     public static function BorraPorID($id){
 
@@ -74,9 +125,9 @@ class RP_ConvocatoriaBaremo{
 
         $conexion = Conexion::AbreConexion();
 
-        $resultado = $conexion->exec("UPDATE Convocatoria_Baremo SET ID='{$objeto->ID}', ID_Convocatoria='{$objeto->ID_Convocatoria}',
-        ID_Item='{$objeto->ID_Item}', notaMax='{$objeto->notaMax}', notaMin='{$objeto->notaMin}',
-        requisito='{$objeto->requisito}', aportaAlumno='{$objeto->aportaAlumno}' WHERE ID={$id}");
+        $resultado = $conexion->exec("UPDATE Convocatoria_Baremo SET ID_Convocatoria='{$objeto->getIDConvocatoria()}',
+        ID_Item='{$objeto->getIDItem()}', notaMax='{$objeto->getNotaMax()}', notaMin='{$objeto->getNotaMin()}',
+        requisito='{$objeto->getRequisito()}', aportaAlumno='{$objeto->getAportaAlumno()}' WHERE ID_Convocatoria={$id}");
 
     }
 

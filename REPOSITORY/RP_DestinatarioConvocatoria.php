@@ -54,6 +54,32 @@ class RP_DestinatarioConvocatoria{
 
     }
 
+    public static function BuscarPorID_Convocatoria($id){
+
+        
+        //Abrimos la conexión
+        $conexion=Conexion::AbreConexion();
+
+        $resultado= $conexion->query("Select * from Destinatario_Convocatoria where ID_Convocatoria=$id");
+        $array=null;
+
+        while($tuplas=$resultado->fetch(PDO::FETCH_OBJ)){
+
+            $ID= $tuplas->ID;
+            $ID_Convocatoria = $tuplas->ID_Convocatoria;
+            $codigo_grupo=$tuplas->codigo_grupo;
+     
+
+            $DestinatarioConvocatoria = new Destinatario_Convocatoria ($ID, $ID_Convocatoria, $codigo_grupo);
+
+            $array[]=$DestinatarioConvocatoria;
+            
+        }
+        //return $DestinatarioConvocatoria;
+        return $array;
+
+    }
+
     public static function BorraPorID($id){
 
         //Abrimos la conexion

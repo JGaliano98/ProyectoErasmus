@@ -40,7 +40,10 @@ if ($acceder) {
         }
 
     }else{
-        echo "No existe el usuario";
+        
+            $mensaje = "No existe el usuario";
+            echo '<div id="mensajeError">' . $mensaje . '</div>';
+
     }
 }
 

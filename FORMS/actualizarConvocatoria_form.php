@@ -8,6 +8,32 @@ $solicitar = isset($_POST['btnSolicitar']);
 
 $volver = isset($_POST['btnVolver']);
 
+$ID_Convocatoria_Actualizar = $_GET['ID_Convocatoria'];
+//var_dump($ID_Convocatoria_Actualizar);
+
+//Para obtener el ID de la convocatoria
+
+$datos = RP_Convocatoria::BuscarPorID($ID_Convocatoria_Actualizar);
+
+//Para obtener los datos de los destinatarios en la convocatoria:
+
+$datosDestinatario = RP_DestinatarioConvocatoria::BuscarPorID_Convocatoria($ID_Convocatoria_Actualizar);
+//var_dump($datosDestinatario);
+
+//Para obtener los datos de los items baremables en la convocatoria:
+
+$datosConvocatoriaBaremo = RP_ConvocatoriaBaremo::BuscarPorID_Convocatoria($ID_Convocatoria_Actualizar);
+//var_dump($datosConvocatoriaBaremo);
+
+
+//Para obtener los datos de los niveles de idiomas
+
+
+
+
+
+
+
 if($volver){
 
     header('Location:/ProyectoErasmus/index.php?menu=administrador');
@@ -20,7 +46,7 @@ if($solicitar){
  
     $nombreConvocatoria =$_POST['txtNombre'];
     $proyecto= $_POST['proyecto'];
-    $destinatarios = $_POST['destinatarios'];
+    //$destinatarios = $_POST['destinatarios'];
     $numMovilidades =  $_POST['txtNumeroMovilidades'];
     $diasMovilidad = $_POST['txtDias'];
     $destino = $_POST['txtDestino'];
@@ -55,12 +81,22 @@ if($solicitar){
 
     $convocatoria = new Convocatoria(1, $numMovilidades, $diasMovilidad, $tipo, $destino, $fechaInicioSolicitudes,$fechaFinSolicitudes,$fechaInicioPruebas,$fechaFinPruebas,$fechaProvisional,$fechaDefinitivo,$proyecto, $nombreConvocatoria);
 
-    $result=RP_Convocatoria::InsertaObjeto($convocatoria);
+
+    $result=RP_Convocatoria::ActualizaPorID($ID_Convocatoria_Actualizar,$convocatoria);
+
+
+
+
+
+
+
+
+    //var_dump($convocatoria); 
 
     if($result==true){
-        echo 'Convocatoria creada correctamente';
+        header('Location:/ProyectoErasmus/index.php?menu=actualizarConvocatoriaForm&&ID_Convocatoria='.$ID_Convocatoria_Actualizar);
     }else{
-        echo 'Error al crear la convocatoria';
+        echo 'Error al actualizar la convocatoria';
     }
 
 
@@ -68,45 +104,38 @@ if($solicitar){
 
 
     //Obtiene el valor de la convocatoria introducida
+
     $idConvocatoria = $convocatoriaObtenida->getID_Convocatoria();
 
-    //Para obtener los destinatarios
-
-    foreach ($destinatarios as $destinatario) 
-    {
-        // Crea las tablas
-        $destinatarioInsertado = new Destinatario_Convocatoria("", $idConvocatoria, $destinatario);
-        RP_DestinatarioConvocatoria::InsertaObjeto($destinatarioInsertado);
-
-    }
 
     //Para la tabla de los Items
 
     // Asumiendo que todos los arrays tienen la misma longitud
-    $longitud = count($notaMaxima);
+     $longitud = count($notaMaxima);
 
     for ($i = 0; $i < $longitud; $i++) {
 
         $convocatoriaBaremo = new Convocatoria_Baremo("",$idConvocatoria, $i+1, $notaMaxima[$i], $notaMin[$i], $requisito[$i], $aportaAlumno[$i] );
 
-        RP_ConvocatoriaBaremo::InsertaObjeto($convocatoriaBaremo);
+        //RP_ConvocatoriaBaremo::InsertaObjeto($convocatoriaBaremo);
+        //RP_ConvocatoriaBaremo::ActualizaPorID($ID_Convocatoria_Actualizar,$convocatoriaBaremo);
 
     }
 
-    //Para la tabla de idiomas
+    // //Para la tabla de idiomas
 
-    $longitudIdioma = count($notaMaximaIdioma);
+    // $longitudIdioma = count($notaMaximaIdioma);
 
-    $convocatoriaBaremoidioma=null;
+    // $convocatoriaBaremoidioma=null;
 
-    for ($i = 0; $i < $longitudIdioma; $i++) {
+    // for ($i = 0; $i < $longitudIdioma; $i++) {
 
-        $convocatoriaBaremoidioma = new Convocatoria_Baremo_Idioma("",$idConvocatoria, $i+1, $notaMaximaIdioma[$i]);
+    //     $convocatoriaBaremoidioma = new Convocatoria_Baremo_Idioma("",$idConvocatoria, $i+1, $notaMaximaIdioma[$i]);
 
 
-        RP_ConvocatoriaBaremoIdioma::InsertaObjeto($convocatoriaBaremoidioma);
+    //     RP_ConvocatoriaBaremoIdioma::InsertaObjeto($convocatoriaBaremoidioma);
 
-    }
+    // }
 
 }
 
@@ -131,7 +160,7 @@ if($solicitar){
                             <label>Nombre:</label>
                         </div>
                         <div id="divTxtNombre">
-                            <input type="text" name="txtNombre" id="txtNombre">
+                            <input type="text" name="txtNombre" id="txtNombre" value="<?php echo $datos->getNombre()?>">
                         </div>
                     </div>
 
@@ -140,15 +169,20 @@ if($solicitar){
                             <label>Proyecto al que pertenece:</label>
                         </div>
                         <div id="CBProyecto">
-                            <select name="proyecto" class="proyectos" id="txtPoyectos">
+                            <select name="proyecto" class="proyectos" id="txtPoyectos" >
                                 <?php
+
+                                $convoc = RP_Convocatoria::BuscarPorID($ID_Convocatoria_Actualizar);
+                                $idproy = $convoc->getID_Proyecto(); 
+                                
+                                $proyectoActual = RP_Proyecto::BuscarPorID($idproy);
                                 // Obtiene todos los proyectos
                                 $proyectos = RP_Proyecto::MostrarTodo();
 
                                 // Genera las opciones del select utilizando un bucle
                                 foreach ($proyectos as $proyecto) {
                                     ?>
-                                <option value = "<?php echo $proyecto->getID_Proyecto()?>"><?php echo $proyecto->getNombre() ?></option>
+                                <option value ="0"><?php echo $proyectoActual->getNombre()?> </option>
                                     <?php
                                 }
                                 ?>
@@ -156,13 +190,12 @@ if($solicitar){
                         </div>
                     </div>
 
-                    
                     <div id="divMovilidades">
                         <div id="lblMovilidades">
                             <label>Número de movilidades:</label>
                         </div>
                         <div id="divTxtMovilidades">
-                            <input type="number" id="txtNumeroMovilidades" name="txtNumeroMovilidades" min="1" max="6" value="1">
+                            <input type="number" id="txtNumeroMovilidades" name="txtNumeroMovilidades" min="1" max="6" value="<?php echo $datos->getMovilidades()?>">
                         </div>
                     </div>
 
@@ -171,7 +204,7 @@ if($solicitar){
                             <label>Destino:</label>
                         </div>
                         <div id="divTxtDestino">
-                            <input type="input" name="txtDestino" id="txtDestino">
+                            <input type="input" name="txtDestino" id="txtDestino" value="<?php echo $datos->getDestino()?>">
                         </div>
                     </div>
 
@@ -181,7 +214,7 @@ if($solicitar){
                             <label>Dias de movilidad:</label>
                         </div>
                         <div id="divTxtDias">
-                            <input type="text" name="txtDias" id="txtDias">
+                            <input type="text" name="txtDias" id="txtDias" value="<?php echo $datos->getDias()?>">
                         </div>
                     </div>
 
@@ -213,7 +246,7 @@ if($solicitar){
                             <label>Fecha de  Inicio de la Solicitud:</label>
                         </div>
                         <div id="divTxtFechaInicioSolicitudes">
-                            <input type="datetime-local" name="txtFechaInicioSolicitudes" id="txtFechaInicioSolicitudes">
+                            <input type="datetime-local" name="txtFechaInicioSolicitudes" id="txtFechaInicioSolicitudes" value="<?php echo $datos->getFechaInicioSolicitudes()?>">
                         </div>
                     </div>
 
@@ -223,7 +256,7 @@ if($solicitar){
                             <label>Fecha de Fin de la Solicitud:</label>
                         </div>
                         <div id="divTxtFechaFinSolicitudes">
-                            <input type="datetime-local" name="txtFechaFinSolicitudes" id="txtFechaFinSolicitudes">
+                            <input type="datetime-local" name="txtFechaFinSolicitudes" id="txtFechaFinSolicitudes" value="<?php echo $datos->getFechaFinSolicitudes()?>">
                         </div>
                     </div>
 
@@ -233,7 +266,7 @@ if($solicitar){
                             <label>Fecha de  Inicio de las Pruebas:</label>
                         </div>
                         <div id="divTxtFechaInicioPruebas">
-                            <input type="datetime-local" name="txtFechaInicioPruebas" id="txtFechaInicioPruebas">
+                            <input type="datetime-local" name="txtFechaInicioPruebas" id="txtFechaInicioPruebas" value="<?php echo $datos->getFechaInicioPruebas()?>">
                         </div>
                     </div>
                     <div id="divFechaFinPruebas">
@@ -241,7 +274,7 @@ if($solicitar){
                             <label>Fecha de Fin de las Pruebas:</label>
                         </div>
                         <div id="divTxtFechaFinPruebas">
-                            <input type="datetime-local" name="txtFechaFinPruebas" id="txtFechaFinPruebas">
+                            <input type="datetime-local" name="txtFechaFinPruebas" id="txtFechaFinPruebas" value="<?php echo $datos->getFechaFinPruebas()?>">
                         </div>
                     </div>
 
@@ -252,7 +285,7 @@ if($solicitar){
                             <label>Fecha de publicación del listado provisional:</label>
                         </div>
                         <div id="divTxtFechaProvisional">
-                            <input type="datetime-local" name="txtFechaProvisional" id="txtFechaProvisional">
+                            <input type="datetime-local" name="txtFechaProvisional" id="txtFechaProvisional" value="<?php echo $datos->getFechaListaProvisional()?>">
                         </div>
                     </div>
                     <div id="divFechaDefinitivo">
@@ -260,7 +293,7 @@ if($solicitar){
                             <label>Fecha de publicación del listado definitivo:</label>
                         </div>
                         <div id="divTxtFechaDefinitivo">
-                            <input type="datetime-local" name="txtFechaDefinitivo" id="txtFechaDefinitivo">
+                            <input type="datetime-local" name="txtFechaDefinitivo" id="txtFechaDefinitivo" value="<?php echo $datos->getFechaListaDefinitiva()?>">
                         </div>
                     </div>
 
@@ -270,6 +303,7 @@ if($solicitar){
 
                 <div id="divTablaItems">
                     <table id="tablaItems">
+                        <!-- Encabezados de la tabla -->
                         <thead>
                             <tr>
                                 <th>Items</th>
@@ -280,42 +314,53 @@ if($solicitar){
                             </tr>
                         </thead>
 
+                        <!-- Cuerpo de la tabla -->
                         <tbody>
                             <?php
+                            
+                            
 
+                            for ($i=0; $i<4; $i++) {
+
+                                // Obtiene todos los itemBaremables
+                                $itemBaremables = RP_ItemBaremable::BuscarPorID($i+1);
+
+
+                                $datosConvocatoriaBaremo = RP_ConvocatoriaBaremo::BuscarPorID_ConvocatoriaeID_Item($ID_Convocatoria_Actualizar, $i+1);
+                                //var_dump($datosConvocatoriaBaremo);
                                 
-
-                                //Obtiene todos los itemBaremables
-                                $itemBaremables = RP_ItemBaremable::MostrarTodo();
-                    
-                                // Genera las opciones del select utilizando un bucle
-                                foreach ($itemBaremables as $itemBaremable) 
-                                {
+                                //var_dump($datosConvocatoriaBaremo);
+                                // Obtiene los valores
+                                $notaMaxima = $datosConvocatoriaBaremo->getNotaMax();
+                                $requisito = $datosConvocatoriaBaremo->getRequisito();
+                                $notaMinima = $datosConvocatoriaBaremo->getNotaMin();
+                                $aportaAlumno = $datosConvocatoriaBaremo->getAportaAlumno();
                             ?>
-                                    <tr>
-                                        <td id="nombreItems"><?php echo $itemBaremable->getNombre() ?></td>
-                                        <td><input id="" type = "number" name = "notaMax[]" class = "notaMax" min = "0" max = "4" value = "2"></td>
-                                        <td>
-                                            <select name = "requisitos[]" class = "requisitos">
-                                                <option value = "0">Sí</option>
-                                                <option value = "1">No</option>
-                                            </select>
-                                        </td>
-                                        <td><input type = "number" name = "notaMin[]" class = "notaMin" min = "0" max = "4" value = "2"></td>
-                                        <td>
-                                            <select name = "aportaAlumno[]" class = "aportaAlumno">
-                                                <option value = "0">Sí</option>
-                                                <option value = "1">No</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-
+                                <tr>
+                                    <!-- Celdas de la tabla -->
+                                    <td id="nombreItems"><?php echo $itemBaremables->getNombre() ?></td>
+                                    <td><input id="" type="number" name="notaMax[]" class="notaMax" min="0" max="4" value="<?php echo $notaMaxima ?>"></td>
+                                    <td>
+                                        <select name="requisitos[]" class="requisitos">
+                                            <option value="0" <?php echo $requisito == 0 ? 'selected' : ''; ?>>Sí</option>
+                                            <option value="1" <?php echo $requisito == 1 ? 'selected' : ''; ?>>No</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="number" name="notaMin[]" class="notaMin" min="0" max="4" value="<?php echo $notaMinima ?>"></td>
+                                    <td>
+                                        <select name="aportaAlumno[]" class="aportaAlumno">
+                                            <option value="0" <?php echo $requisito == 0 ? 'selected' : ''; ?>>Sí</option>
+                                            <option value="1" <?php echo $requisito == 1 ? 'selected' : ''; ?>>No</option>
+                                        </select>
+                                    </td>
+                                </tr>
                             <?php
-                                }
+                            }
                             ?>
                         </tbody>
                     </table>
                 </div>
+
 
                 <div id="divTablaIdiomas">
                     <table id="tablaIdiomas">
@@ -329,28 +374,24 @@ if($solicitar){
                         <tbody>
                             <?php
 
-                                require_once $_SERVER['DOCUMENT_ROOT'].'/ProyectoErasmus/Helpers/Autoload.php';
-                                Autoload::Autoload();
+                            for ($i = 0; $i <6; $i++) {
 
-                                //Obtiene todos los itemBaremables
-                                $itemBaremables = RP_NivelIdioma::MostrarTodo();
+                                // Obtiene todos los niveles de idioma
+                                $nivelesIdioma = RP_NivelIdioma::BuscarPorID($i+1);
 
-                    
-                                // Genera las opciones del select utilizando un bucle
-                                foreach ($itemBaremables as $itemBaremable) 
-                                {
-                            ?>
-                                    <tr>
-                                        <td id="nombreNivel"><?php echo $itemBaremable->getNombre() ?></td>
-                                        <td><input type = "number" name = "notaMaxIdioma[]" class = "notaMaxIdioma" min = "0" max = "4" value = "2"></td>
-                                    </tr>
+                                // Obtiene los datos de ConvocatoriaBaremoIdioma
+                                $datosNivelesIdioma = RP_ConvocatoriaBaremoIdioma::BuscarPorID_ConvocatoriaeID_Idioma($ID_Convocatoria_Actualizar, $i+1);
 
-                            <?php
-                                }
+                                ?>
+                                <tr>
+                                    <td id="nombreNivel"><?php echo $nivelesIdioma->getNombre() ?></td>
+                                    <td><input type="number" name="notaMaxIdioma[]" class="notaMaxIdioma" min="0" max="4" value="<?php echo $datosNivelesIdioma -> getNota() ?>"></td>
+                                </tr>
+                                <?php
+                            }
                             ?>
                         </tbody>
                     </table>
-
                 </div>
 
                 <div id="divBotonesConvocatoria">

@@ -10,9 +10,9 @@ if ($acceder) {
 
 }
 
-
-
 ?>
+ 
+
 
 <div class="contenidoRegistro">
     <form method="post">
@@ -31,7 +31,7 @@ if ($acceder) {
                             <label>DNI:</label>
                         </div>
                         <div id="divtxtDNIReg">
-                            <input type="text" name="txtDNI" id="txtDNI">
+                            <input type="text" name="txtDNI" id="txtDNI" data-valida="dni">
                         </div>
                     </div>
 
@@ -40,7 +40,7 @@ if ($acceder) {
                             <label>Contraseña:</label>
                         </div>
                         <div id="divtxtContraseñaReg">
-                            <input type="text" name="txtContraseñaReg" id="txtContraseñaReg">
+                            <input type="text" name="txtContraseñaReg" id="txtContraseñaReg" data-valida="relleno">
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@ if ($acceder) {
                             <label>Nombre:</label>
                         </div>
                         <div id="divtxtNombreReg">
-                            <input type="text" name="txtNombreReg" id="txtNombreReg">
+                            <input type="text" name="txtNombreReg" id="txtNombreReg" data-valida="relleno">
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@ if ($acceder) {
                             <label>Primer Apellido:</label>
                         </div>
                         <div id="divtxtAp1Reg">
-                            <input type="text" name="txtAp1Reg" id="txtAp1Reg">
+                            <input type="text" name="txtAp1Reg" id="txtAp1Reg" data-valida="relleno">
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@ if ($acceder) {
                             <label>Teléfono:</label>
                         </div>
                         <div id="divtxtTelefonoReg">
-                            <input type="text" name="txtTelefonoReg" id="txtTelefonoReg">
+                            <input type="text" name="txtTelefonoReg" id="txtTelefonoReg" data-valida="telefono">
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@ if ($acceder) {
                             <label>Fecha de Nacimiento:</label>
                         </div>
                         <div id="divtxtNacimientoReg">
-                            <input type="date" name="txtNacimientoReg" id="txtNacimientoReg">
+                            <input type="text" name="txtNacimientoReg" id="txtNacimientoReg" data-valida="relleno">
                         </div>
                     </div>
 
@@ -118,7 +118,7 @@ if ($acceder) {
                             <label>Correo Electrónico:</label>
                         </div>
                         <div id="divtxtCorreoReg">
-                            <input type="text" name="txtCorreoReg" id="txtCorreoReg">
+                            <input type="text" name="txtCorreoReg" id="txtCorreoReg" data-valida="correoElectronico">
                         </div>
                     </div>
 
@@ -127,7 +127,7 @@ if ($acceder) {
                             <label>Domicilio:</label>
                         </div>
                         <div id="divtxtDomicilioReg">
-                            <input type="text" name="txtDomicilioReg" id="txtDomicilioReg">
+                            <input type="text" name="txtDomicilioReg" id="txtDomicilioReg" data-valida="relleno">
                         </div>
                     </div>
 
@@ -161,5 +161,6 @@ if ($acceder) {
         </div>
     </form>
 </div>
+
 
 

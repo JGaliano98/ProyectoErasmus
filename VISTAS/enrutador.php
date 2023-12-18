@@ -35,6 +35,10 @@ if (isset($_GET['menu'])) {
     if ($_GET['menu'] == "baremarConvocatorias") {
         require_once $rutaBase . '/Forms/baremacion.php';
     }
-
-
+    if ($_GET['menu'] == "webcam") {
+        require_once $rutaBase . '/helpers/webcam.html';
+    }
+    if ($_GET['menu'] == "pdf") {
+        require_once $rutaBase . '/helpers/pdf.html';
+    }
 }
